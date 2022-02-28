@@ -11,6 +11,12 @@ HOST_IP="$( ifconfig | grep "\binet\b" | grep -vF 127.0.0.1 | head -1 | sed -e '
 set -x
 docker run \
     -p 8080:8080 \
-    --name vulnerable-app \
+    --name vulnerable-app-with-xyz-agent \
     --rm \
-    vulnerable-app
+    -v $PWD/../xyz-agent/target/xyz-agent-1.0.jar:/xyz-agent-1.0.jar \
+    vulnerable-app \
+    java \
+        -javaagent:/xyz-agent-1.0.jar \
+        -DXYZ_AGENT_REPORT_URL=http://$HOST_IP:9411/api/v2/instrumentation-report \
+        -jar /app/spring-boot-application.jar
+
