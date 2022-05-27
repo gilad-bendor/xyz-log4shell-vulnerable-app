@@ -13,7 +13,7 @@ docker run \
     -p 8080:8080 \
     --name vulnerable-app-with-xyz-agent \
     --rm \
-    -v $PWD/../xyz-agent/target/xyz-agent-1.0.jar:/xyz-agent-1.0.jar \
+    -v $PWD/../xyz-agent-java/target/xyz-agent-1.0.jar:/xyz-agent-1.0.jar \
     vulnerable-app \
     java \
         -javaagent:/xyz-agent-1.0.jar \
